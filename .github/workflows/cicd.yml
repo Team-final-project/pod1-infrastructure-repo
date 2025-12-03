@@ -70,6 +70,12 @@ jobs:
            chmod +x ./kubectl
            sudo mv ./kubectl /usr/local/bin/kubectl
 
+      - name: Debug Variables
+        run: |
+          echo "VAR FROM vars.EKS_CLUSTER_NAME = '${{ vars.EKS_CLUSTER_NAME }}'"
+          echo "VAR FROM secrets.EKS_CLUSTER_NAME = '${{ secrets.EKS_CLUSTER_NAME }}'"
+          echo "ENV VAR EKS_CLUSTER_NAME = '$EKS_CLUSTER_NAME'"
+
       - name: 'authenticate to EKS Cluster'
         run: aws eks update-kubeconfig --name ${{ vars.EKS_CLUSTER_NAME }} --region us-east-1
       
